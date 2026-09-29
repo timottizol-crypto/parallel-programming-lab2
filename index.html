@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторная работа №2 — Параллельное программирование</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+
+        <header>
+            <h1>Лабораторная работа №2</h1>
+            <h2>Исследование OpenMP: параллельное умножение матриц</h2>
+            <p class="meta">Выполнил: Золотухин Тимофей | Группа: 6211-100503D | 2026</p>
+        </header>
+
+        <section>
+            <h3>Цель работы</h3>
+            <p>Изучение технологии OpenMP на примере задачи умножения квадратных матриц. Исследование зависимости ускорения от размера задачи и числа потоков.</p>
+        </section>
+
+        <section>
+            <h3>Постановка задачи</h3>
+            <ul>
+                <li>Реализовать программу умножения матриц на C++ с OpenMP.</li>
+                <li>Провести эксперименты с числом потоков: 1, 2, 3, 4, 6, 7, 8.</li>
+                <li>Размеры матриц: 200, 400, 600, 800, 1000, 1200, 1400, 1600.</li>
+                <li>Замерить время, верифицировать через NumPy, построить графики.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Результаты замеров</h3>
+            <p class="table-caption">Время умножения матриц, мс (минимум из 3 запусков)</p>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N</th>
+                            <th>1</th><th>2</th><th>3</th><th>4</th>
+                            <th>6</th><th>7</th><th>8</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>200</td><td>8</td><td>5</td><td>5</td><td>6</td><td>6</td><td>5</td><td>6</td></tr>
+                        <tr><td>400</td><td>78</td><td>47</td><td>40</td><td>39</td><td>34</td><td>29</td><td>34</td></tr>
+                        <tr><td>600</td><td>269</td><td>173</td><td>138</td><td>126</td><td>94</td><td>109</td><td>107</td></tr>
+                        <tr><td>800</td><td>690</td><td>380</td><td>298</td><td>291</td><td>270</td><td>229</td><td>259</td></tr>
+                        <tr><td>1000</td><td>1414</td><td>785</td><td>640</td><td>566</td><td>491</td><td>485</td><td>534</td></tr>
+                        <tr><td>1200</td><td>2670</td><td>1295</td><td>995</td><td>864</td><td>783</td><td>647</td><td>617</td></tr>
+                        <tr><td>1400</td><td>4763</td><td>2507</td><td>2143</td><td>1710</td><td>1274</td><td>1091</td><td>1083</td></tr>
+                        <tr><td>1600</td><td>9965</td><td>6147</td><td>4448</td><td>3811</td><td>2790</td><td>2619</td><td>2582</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h3>Ускорение</h3>
+            <p class="table-caption">Speedup = T(1) / T(N)</p>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N</th>
+                            <th>1</th><th>2</th><th>3</th><th>4</th>
+                            <th>6</th><th>7</th><th>8</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>200</td><td>1.00</td><td>1.60</td><td>1.60</td><td>1.33</td><td>1.33</td><td>1.60</td><td>1.33</td></tr>
+                        <tr><td>400</td><td>1.00</td><td>1.66</td><td>1.95</td><td>2.00</td><td>2.29</td><td>2.69</td><td>2.29</td></tr>
+                        <tr><td>600</td><td>1.00</td><td>1.55</td><td>1.95</td><td>2.13</td><td>2.86</td><td>2.47</td><td>2.51</td></tr>
+                        <tr><td>800</td><td>1.00</td><td>1.82</td><td>2.32</td><td>2.37</td><td>2.56</td><td>3.01</td><td>2.66</td></tr>
+                        <tr><td>1000</td><td>1.00</td><td>1.80</td><td>2.21</td><td>2.50</td><td>2.88</td><td>2.92</td><td>2.65</td></tr>
+                        <tr><td>1200</td><td>1.00</td><td>2.06</td><td>2.68</td><td>3.09</td><td>3.41</td><td>4.13</td><td>4.33</td></tr>
+                        <tr><td>1400</td><td>1.00</td><td>1.90</td><td>2.22</td><td>2.79</td><td>3.74</td><td>4.37</td><td>4.40</td></tr>
+                        <tr><td>1600</td><td>1.00</td><td>1.62</td><td>2.24</td><td>2.61</td><td>3.57</td><td>3.80</td><td>3.86</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h3>Графики</h3>
+            <div class="graph-block">
+                <img src="img/time_graph.png" alt="Зависимость времени от N">
+                <p class="graph-caption">Зависимость времени от размера матрицы</p>
+            </div>
+            <div class="graph-block">
+                <img src="img/speedup_graph.png" alt="Зависимость ускорения от N">
+                <p class="graph-caption">Зависимость ускорения от размера матрицы</p>
+            </div>
+            <div class="graph-block">
+                <img src="img/efficiency_graph.png" alt="Зависимость эффективности от N">
+                <p class="graph-caption">Зависимость эффективности от размера матрицы</p>
+            </div>
+        </section>
+
+        <section>
+            <h3>Анализ результатов</h3>
+            <p>При малых N (200) ускорения почти нет — накладные расходы на создание потоков сопоставимы со временем самой задачи. На N=200 разница между 1 и 8 потоками — меньше 2 мс.</p>
+            <p>При росте N до 400–600 ускорение достигает 2.3x–2.5x. Потоки начинают окупаться, потому что объём работы растёт быстрее, чем расходы на синхронизацию.</p>
+            <p>На N=1200–1600 достигается максимальное ускорение — около 4x на 8 потоках. Это меньше 8x, потому что часть работы последовательна (закон Амдала) и есть накладные расходы OpenMP.</p>
+            <p>На N=1600 заметно небольшое падение ускорения (3.86x) — вероятно, из-за кэш-эффектов и нагрузки на память.</p>
+        </section>
+
+        <section>
+            <h3>Вывод</h3>
+            <p>Параллелизм через OpenMP эффективен при N ≥ 400. Максимальное ускорение — около <strong>4x</strong> на 8 потоках. Все результаты верифицированы через NumPy (<code>verify.py</code> возвращает OK).</p>
+        </section>
+
+        <section>
+            <h3>Исходный код</h3>
+            <ul>
+                <li><a href="cpp/main.cpp">cpp/main.cpp</a> — программа умножения с OpenMP</li>
+                <li><a href="python/generate.py">python/generate.py</a> — генератор матриц</li>
+                <li><a href="python/verify.py">python/verify.py</a> — верификация через NumPy</li>
+                <li><a href="python/run_experiments.py">python/run_experiments.py</a> — прогон экспериментов</li>
+                <li><a href="python/plot.py">python/plot.py</a> — построение графиков</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>© Золотухин Тимофей, 2026</p>
+        </footer>
+
+    </div>
+</body>
+</html>

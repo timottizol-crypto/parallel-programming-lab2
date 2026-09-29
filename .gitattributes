@@ -1,0 +1,8 @@
+# Исключить HTML/CSS из статистики языков
+*.html linguist-detectable=false
+*.css linguist-detectable=false
+
+# Исключить документацию и данные
+*.md linguist-detectable=false
+*.txt linguist-detectable=false
+*.json linguist-detectable=false

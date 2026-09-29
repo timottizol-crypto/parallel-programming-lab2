@@ -1,0 +1,23 @@
+# Данные (генерируются)
+data/*.txt
+data/*.exe
+
+# Исполняемые файлы
+*.exe
+*.out
+matrix
+
+# Python
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# Visual Studio
+x64/
+Debug/
+Release/
+*.user
+*.pdb
+*.ilk
